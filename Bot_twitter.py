@@ -2,7 +2,7 @@ from Keys import getApi
 import re
 import time
 
-#api = getApi()
+api = getApi()
 
 def finishWithQuoi(sentence):
     return re.search("[Qq][Uu][Oo0][iI]\s*\?*\.*\!*$", sentence)
