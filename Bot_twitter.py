@@ -1,9 +1,11 @@
 from Keys import getApi
+import re
 import time
-api = getApi()
 
-def finishWith(sentence, keyword):
-    return  sentence.endswith(keyword)
+#api = getApi()
+
+def finishWithQuoi(sentence):
+    return re.search("[Qq][Uu][Oo0][iI]\s*\?*\.*\!*$", sentence)
 
 def dontStartsWith (sentence, keyword):
     return not sentence.startswith(keyword)
@@ -14,7 +16,7 @@ def postStatus(update, inReplyTo, media):
 def search(research, Howmany):
     searchResult = api.GetSearch(raw_query="q="+research+"&result_type=recent&count="+Howmany)
     for search in searchResult :
-        if finishWith(search.text,"Quoi") or finishWith(search.text,"quoi") or finishWith(search.text,"quoi!") or finishWith(search.text,"quoi?") or finishWith(search.text,"quoi !") or finishWith(search.text,"quoi ?") or finishWith(search.text,"quoi ???") or finishWith(search.text,"quoi???"):
+        if finishWithQuoi(search.text) != None:
             if dontStartsWith(search.text,"RT"):
                 print(search.text)
                 time.sleep(3)
